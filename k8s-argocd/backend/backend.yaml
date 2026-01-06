@@ -4,7 +4,7 @@ metadata:
   name: backend
   namespace: argocd
 spec:
-  project: defaul
+  project: default
   source:
     repoURL: https://github.com/CloudTechDevOps/google-store-DevOps-project.git
     path: backend
