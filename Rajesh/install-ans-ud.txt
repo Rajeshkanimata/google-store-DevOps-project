@@ -1,0 +1,70 @@
+#so craete a server for ansible and the install ansible inside and also install git topull repostories 
+
+#else we casn user userdata to create or install these two in anisble server 
+
+USERDATA While creating ansilble server
+----------------------------------------------------------------------------------
+#!/bin/bash
+set -e
+
+# Update system
+dnf update -y || yum update -y
+
+# Enable EPEL (needed for ansible)
+dnf install -y epel-release || amazon-linux-extras enable epel
+
+# Install Ansible and Git
+dnf install -y ansible git || yum install -y ansible git
+
+# Verify installation
+ansible --version
+git --version
+
+----------------------------------------------------------------------------------
+
+FOR UBUNTU 
+---------------------------------------------------------------------------------
+#!/bin/bash
+set -e
+
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update -y
+apt-get upgrade -y
+
+# Install required packages
+apt-get install -y software-properties-common git
+
+# Enable Ansible official PPA
+add-apt-repository --yes --update ppa:ansible/ansible
+
+# Install Ansible
+apt-get install -y ansible
+
+# Enable SSH
+systemctl enable ssh
+systemctl start ssh
+
+# Verify
+ansible --version || true
+git --version || true
+
+////Inventory  sample for ubuntu  [eks]
+eks ansible_host=172.31.25.243 ansible_user=ubuntu
+////
+-----------------------------------------------------------------------------------
+
+and after launch and connect test with 
+ansible --version
+git --version
+
+
+#check userdata again its wrong and 
+
+#now clone  this repo in ansible server and now 
+
+cd Rajesh
+cd ansible
+ansible-playbook -i inventory .yml
+
+and connect with eks and create a cluster
